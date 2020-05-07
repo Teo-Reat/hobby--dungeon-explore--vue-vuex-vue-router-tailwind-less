@@ -1,6 +1,7 @@
 <template>
   <div>
     <div>
+      <router-link to="/">Home</router-link>
       <label>
         <input v-model="characterName" type="text" placeholder="Enter your name here">
       </label>
@@ -14,6 +15,11 @@
         <li v-for="(value, stat, index) in getCharacterStats.stats" :key="index">{{ stat }}: {{ value }}</li>
       </ul>
     </div>
+    <div>
+      <label >{{ name }}
+        <input type="radio" :value="name" name="gender" v-model="genderStats">
+      </label>
+    </div>
     <router-link to="/game">Start game</router-link>
   </div>
 </template>
@@ -24,20 +30,25 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   data () {
     return {
-      // name: 'John Wick'
+      genderStats: {}
     }
   },
   computed: {
     characterName: {
       get () {
-        return this.$store.state.character.name
+        return this.getCharacterStats.name
       },
       set (value) {
         this.$store.commit('updateName', value)
       }
     },
-    ...mapGetters(['getCharacterStats']),
+    ...mapGetters(['getCharacterStats', 'getGender']),
     ...mapMutations(['updateName'])
+  },
+  methods: {
+    // setGender () {
+    //   this.genderStats =
+    // }
   }
 }
 </script>
