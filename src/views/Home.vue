@@ -11,7 +11,7 @@
     Damn yer ale, feed the scallywag.
     Ahoy, golden scallywag. you won't fight the captain's quarters.
     Endurance, halitosis, and yellow fever.</p>
-    <router-link to="/game">Game</router-link>
+    <router-link to="/create">Create character</router-link>
   </div>
 </template>
 

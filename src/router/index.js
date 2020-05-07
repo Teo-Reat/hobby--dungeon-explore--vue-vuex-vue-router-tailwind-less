@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Character from '../views/CharacterCreator'
 
 Vue.use(VueRouter)
 
@@ -9,6 +10,14 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    meta: {
+      title: 'Dungeon Explore'
+    }
+  },
+  {
+    path: '/create',
+    name: 'CharacterCreate',
+    component: Character,
     meta: {
       title: 'Dungeon Explore'
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div>
     <router-link to="/">Home</router-link>
   </div>
 </template>
