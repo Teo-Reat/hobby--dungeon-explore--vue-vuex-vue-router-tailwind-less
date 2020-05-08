@@ -2,53 +2,91 @@
   <div>
     <div>
       <router-link to="/">Home</router-link>
-      <label>
-        <input v-model="characterName" type="text" placeholder="Enter your name here">
-      </label>
+      <hr>
     </div>
-    <div>
-      <strong>Name: {{ getCharacterStats.name }}</strong>
-      <p>Gender: {{ getCharacterStats.gender }}</p>
-      <p>Background: {{ getCharacterStats.background }}</p>
-      <p>Class: {{ getCharacterStats.class }}</p>
-      <ul>
-        <li v-for="(value, stat, index) in getCharacterStats.stats" :key="index">{{ stat }}: {{ value }}</li>
-      </ul>
-    </div>
-    <div>
-      <label >{{ name }}
-        <input type="radio" :value="name" name="gender" v-model="genderStats">
-      </label>
-    </div>
+    <section class="wrapper">
+      <div class="character-preview w-1/3 text-right px-4 py-2">
+        <strong>Name: {{ character.name }}</strong>
+        <p>Gender: {{ character.gender }}</p>
+        <p>Background: {{ character.background }}</p>
+        <p>Class: {{ character.class }}</p>
+        <ul>
+          <li v-for="(value, stat, index) in character.stats" :key="index">{{ stat }}: {{ value }}</li>
+        </ul>
+      </div>
+      <hr>
+      <div class="character-create w-2/3 text-left px-4 py-2">
+        <div>
+          <label class="mb-2 block">
+            <input v-model="character.name" type="text" placeholder="Enter your name here" class="py-1 px-4 block">
+          </label>
+        </div>
+        <div>
+          <label v-for="stat in getGender"
+                 :key="stat.id" class="py-2 px-4 block"> {{ stat.gender }}
+            <input type="radio" :value="stat.gender" v-model="character.gender" @change="character.stats = stat.stats">
+          </label>
+        </div>
+        <div>
+          <label v-for="stat in getClass"
+                 :key="stat.id" class="py-2 px-4 block"> {{ stat.name }}
+            <input type="radio" :value="stat.name" v-model="character.class" @change="character.stats = stat.stats">
+          </label>
+        </div>
+      </div>
+    </section>
     <router-link to="/game">Start game</router-link>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
     return {
-      genderStats: {}
+      character: {
+        name: 'John Wick',
+        gender: '',
+        background: '',
+        class: '',
+        stats: {
+          strength: 0,
+          dexterity: 0,
+          intelligence: 0
+        }
+      }
     }
   },
+  mounted () {
+    this.character = this.getCharacter
+    // this.character.stats = this.getGender.id
+  },
   computed: {
-    characterName: {
+    setName: {
       get () {
-        return this.getCharacterStats.name
+        return this.getCharacter.name
       },
       set (value) {
         this.$store.commit('updateName', value)
       }
     },
-    ...mapGetters(['getCharacterStats', 'getGender']),
-    ...mapMutations(['updateName'])
+    setGender: {
+      get () {
+        return this.getCharacter.gender
+      },
+      set (value) {
+        this.$store.commit('updateGender', value)
+      }
+    },
+    ...mapGetters(['getCharacter', 'getGender', 'getClass'])
   },
   methods: {
-    // setGender () {
-    //   this.genderStats =
-    // }
   }
 }
 </script>
+
+<style>
+  .character-preview {}
+  .character-create {}
+</style>

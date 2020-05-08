@@ -1,38 +1,38 @@
 export default {
   state: {
-    classes: [
+    genders: [
       {
         id: 0,
-        name: 'Rhino',
+        gender: 'Male',
         stats: {
           strength: 6,
           dexterity: 4,
-          intelligence: 2
+          intelligence: 4
         }
       },
       {
         id: 1,
-        name: 'Cat',
+        gender: 'Female',
         stats: {
           strength: 4,
           dexterity: 6,
-          intelligence: 2
+          intelligence: 4
         }
       },
       {
         id: 2,
-        name: 'Owl',
+        gender: 'Reptilian',
         stats: {
-          strength: 4,
-          dexterity: 2,
-          intelligence: 6
+          strength: 2,
+          dexterity: 4,
+          intelligence: 8
         }
       }
     ]
   },
   getters: {
-    getClass (state) {
-      return state.classes
+    getGender (state) {
+      return state.genders
     }
   }
 }

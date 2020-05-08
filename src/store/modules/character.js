@@ -6,21 +6,23 @@ export default {
       background: '',
       class: '',
       stats: {
-        Strength: 0,
-        Dexterity: 0,
-        Intelligence: 0
+        strength: 0,
+        dexterity: 0,
+        intelligence: 0
       }
     }
   },
   getters: {
-    getCharacterStats (state) {
+    getCharacter (state) {
       return state.character
     }
   },
   mutations: {
     updateName (state, value) {
-      console.log(value)
       state.character.name = value
+    },
+    updateGender (state, value) {
+      state.character.gender = value
     }
   },
   actions: {
