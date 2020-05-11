@@ -1,27 +1,43 @@
 export default {
   state: {
-    backgrounds: {
-      noble: {
-        strength: 0,
-        dexterity: 1,
-        intelligence: 1
+    backgrounds: [
+      {
+        id: 0,
+        background: 'Noble',
+        stats: {
+          strength: 0,
+          dexterity: 1,
+          intelligence: 3
+        }
       },
-      farmer: {
-        strength: 2,
-        dexterity: 0,
-        intelligence: 0
+      {
+        id: 1,
+        background: 'Farmer',
+        stats: {
+          strength: 3,
+          dexterity: 1,
+          intelligence: 0
+        }
       },
-      poacher: {
-        strength: 0,
-        dexterity: 2,
-        intelligence: 0
+      {
+        id: 2,
+        background: 'Poacher',
+        stats: {
+          strength: 0,
+          dexterity: 3,
+          intelligence: 1
+        }
       },
-      trader: {
-        strength: 0,
-        dexterity: 0,
-        intelligence: 2
+      {
+        id: 3,
+        background: 'Trader',
+        stats: {
+          strength: 0,
+          dexterity: 0,
+          intelligence: 4
+        }
       }
-    }
+    ]
   },
   getters: {
     getBackground (state) {
