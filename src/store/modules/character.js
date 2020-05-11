@@ -1,6 +1,6 @@
 const state = {
   character: {
-    name: '',
+    name: 'John Doe',
     gender: '',
     background: '',
     class: '',
@@ -20,8 +20,15 @@ const mutations = {
   updateName (state, value) {
     state.character.name = value
   },
-  updateGender (state, value) {
-    state.character.gender = value
+  copyCharacterToStore (state, value) {
+    for (let i = 0; i < Object.values(value).length; i++) {
+      if (Object.values(value)[i] === '') {
+        alert('Set property')
+        break
+      } else {
+        state.character = value
+      }
+    }
   }
 }
 const actions = {

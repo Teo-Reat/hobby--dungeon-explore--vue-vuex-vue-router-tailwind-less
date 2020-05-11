@@ -4,6 +4,7 @@ export default {
       {
         id: 0,
         background: 'Noble',
+        description: 'Chicken platter has to have a hardened, roasted chickpeas component.',
         stats: {
           strength: 0,
           dexterity: 1,
@@ -13,6 +14,7 @@ export default {
       {
         id: 1,
         background: 'Farmer',
+        description: 'White bread combines greatly with packaged cauliflower.',
         stats: {
           strength: 3,
           dexterity: 1,
@@ -22,6 +24,7 @@ export default {
       {
         id: 2,
         background: 'Poacher',
+        description: 'When fluffing bitter turkey, be sure they are room temperature.',
         stats: {
           strength: 0,
           dexterity: 3,
@@ -31,10 +34,11 @@ export default {
       {
         id: 3,
         background: 'Trader',
+        description: 'For a niffy minced paste, add some white wine and cayenne pepper.',
         stats: {
-          strength: 0,
+          strength: 1,
           dexterity: 0,
-          intelligence: 4
+          intelligence: 3
         }
       }
     ]

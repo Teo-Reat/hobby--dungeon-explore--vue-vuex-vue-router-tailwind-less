@@ -3,6 +3,7 @@ const state = {
     {
       id: 0,
       class: 'Fighter',
+      description: 'Scabbards hobble on courage at east india!',
       stats: {
         strength: 6,
         dexterity: 4,
@@ -12,6 +13,7 @@ const state = {
     {
       id: 1,
       class: 'Thief',
+      description: 'Ho-ho-ho! punishment of treasure.',
       stats: {
         strength: 4,
         dexterity: 6,
@@ -21,6 +23,7 @@ const state = {
     {
       id: 2,
       class: 'Sage',
+      description: 'Pestilence ho! pull to be crushed.',
       stats: {
         strength: 4,
         dexterity: 2,
