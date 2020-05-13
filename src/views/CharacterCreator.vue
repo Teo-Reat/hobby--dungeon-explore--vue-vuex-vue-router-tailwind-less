@@ -7,18 +7,10 @@
     <section class="wrapper">
 
 <!--      character: preview-->
-      <div class="character-preview w-3/12 text-left px-4 py-2">
-        <strong>Name: {{ character.name }}</strong>
-        <p>Gender: {{ character.gender }}</p>
-        <p>Background: {{ character.background }}</p>
-        <p>Class: {{ character.class }}</p>
-        <ul class="pl-2 mt-2">
-          <li v-for="(value, stat, index) in character.stats" :key="index">{{ stat }}: {{ value }}</li>
-        </ul>
-      </div>
+      <character-preview :character="character" />
 
 <!--      character: create your starting personage-->
-      <div class="character-create w-5/12 text-left px-4 py-2 text-center mb-2">
+      <div class="character-create w-6/12 text-left px-4 py-2 text-center mb-2">
         <div>
           <label class="mb-4 block">
             <input v-model="character.name"
@@ -28,33 +20,36 @@
           </label>
         </div>
         <section class="stats flex justify-between">
-          <div class="mb-2 w-1/3">
+          <div class="mb-2 mx-1 w-1/3 shadow rounded">
+            <h2 class="font-black mb-4 mt-2">Gender</h2>
             <label v-for="type in getGender"
                    :key="type.id"
-                   :class="{ active: character.gender === type.gender }"
-                   class="py-2 px-4 block mx-2"> {{ type.gender }}
+                   :class="{ 'shadow': character.gender === type.gender }"
+                   class="py-2 px-4 block mx-2 mb-2"> {{ type.gender }}
               <input type="radio"
                      :value="type.gender"
                      v-model="character.gender"
                      @change="setStats(type, type.stats)">
             </label>
           </div>
-          <div class="mb-2 w-1/3">
+          <div class="mb-2 mx-1 w-1/3 shadow rounded">
+            <h2 class="font-black mb-4 mt-2">Background</h2>
             <label v-for="type in getBackground"
                    :key="type.id"
-                   :class="{ active: character.background === type.background }"
-                   class="py-2 px-4 block mx-2"> {{ type.background }}
+                   :class="{ shadow: character.background === type.background }"
+                   class="py-2 px-4 block mx-2 mb-2"> {{ type.background }}
               <input type="radio"
                      :value="type.background"
                      v-model="character.background"
                      @change="setStats(type, type.stats)">
             </label>
           </div>
-          <div class="mb-2 w-1/3">
+          <div class="mb-2 mx-1 w-1/3 shadow rounded bg">
+            <h2 class="font-black mb-4 mt-2">Class</h2>
             <label v-for="type in getClass"
                    :key="type.id"
-                   :class="{ active: character.class === type.class }"
-                   class="py-2 px-4 block mx-2"> {{ type.class }}
+                   :class="{ 'shadow': character.class === type.class }"
+                   class="py-2 px-4 block mx-2 mb-2"> {{ type.class }}
               <input type="radio"
                      :value="type.class"
                      v-model="character.class"
@@ -65,34 +60,34 @@
       </div>
 
 <!--      character: dynamic information-->
-      <div class="temporary-condition w-4/12 px-4 py-2">
+      <div class="temporary-condition w-3/12 px-4 py-2">
         <div v-show="character.gender" class="mb-2">
           <strong>{{ character.gender }}</strong>
           <p v-for="type in getGender"
              v-show="type.gender === character.gender"
              :key="type.id">{{ type.description }}</p>
           <p>
-            Str: {{ characterState.setGender.strength }} /
-            Dex: {{ characterState.setGender.dexterity }} /
-            Int: {{ characterState.setGender.intelligence }}
+            Str: {{ intermediateStats.setGender.strength }} /
+            Dex: {{ intermediateStats.setGender.dexterity }} /
+            Int: {{ intermediateStats.setGender.intelligence }}
           </p>
         </div>
         <div v-show="character.background" class="mb-2">
           <strong>{{ character.background }}</strong>
           <p v-for="type in getBackground" v-show="type.background === character.background" :key="type.id">{{ type.description }}</p>
           <p>
-            Str: {{ characterState.setBackground.strength }} /
-            Dex: {{ characterState.setBackground.dexterity }} /
-            Int: {{ characterState.setBackground.intelligence }}
+            Str: {{ intermediateStats.setBackground.strength }} /
+            Dex: {{ intermediateStats.setBackground.dexterity }} /
+            Int: {{ intermediateStats.setBackground.intelligence }}
           </p>
         </div>
         <div v-show="character.class" class="mb-2">
           <strong>{{ character.class }}</strong>
           <p v-for="type in getClass" v-show="type.class === character.class" :key="type.id">{{ type.description }}</p>
           <p>
-            Str: {{ characterState.setClass.strength }} /
-            Dex: {{ characterState.setClass.dexterity }} /
-            Int: {{ characterState.setClass.intelligence }}
+            Str: {{ intermediateStats.setClass.strength }} /
+            Dex: {{ intermediateStats.setClass.dexterity }} /
+            Int: {{ intermediateStats.setClass.intelligence }}
           </p>
         </div>
       </div>
@@ -107,11 +102,16 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import { calculateCharacterState } from '../components/mixins/calculateCharacterState'
+import CharacterPreview from '../components/interfaces/CharacterPreview'
 
 export default {
+  components: {
+    CharacterPreview
+  },
   data () {
     return {
-      characterState: {
+      intermediateStats: {
         setGender: {
           strength: 0,
           dexterity: 0,
@@ -141,6 +141,7 @@ export default {
       }
     }
   },
+  mixins: [calculateCharacterState],
   mounted () {
     this.character = this.getCharacter
   },
@@ -150,17 +151,18 @@ export default {
   methods: {
     setStats (obj, stat) {
       if (Object.prototype.hasOwnProperty.call(obj, 'gender')) {
-        this.characterState.setGender = stat
+        this.intermediateStats.setGender = stat
       } else if (Object.prototype.hasOwnProperty.call(obj, 'background')) {
-        this.characterState.setBackground = stat
+        this.intermediateStats.setBackground = stat
       } else if (Object.prototype.hasOwnProperty.call(obj, 'class')) {
-        this.characterState.setClass = stat
+        this.intermediateStats.setClass = stat
       } else {
         console.log('Oh my fucking god! Something went wrong!')
       }
-      this.character.stats.strength = this.characterState.setGender.strength + this.characterState.setBackground.strength + this.characterState.setClass.strength
-      this.character.stats.dexterity = this.characterState.setGender.dexterity + this.characterState.setBackground.dexterity + this.characterState.setClass.dexterity
-      this.character.stats.intelligence = this.characterState.setGender.intelligence + this.characterState.setBackground.intelligence + this.characterState.setClass.intelligence
+      this.character.stats.strength = this.intermediateStats.setGender.strength + this.intermediateStats.setBackground.strength + this.intermediateStats.setClass.strength
+      this.character.stats.dexterity = this.intermediateStats.setGender.dexterity + this.intermediateStats.setBackground.dexterity + this.intermediateStats.setClass.dexterity
+      this.character.stats.intelligence = this.intermediateStats.setGender.intelligence + this.intermediateStats.setBackground.intelligence + this.intermediateStats.setClass.intelligence
+      this.calculateCharacterState(this.character, this.character.stats)
     },
     ...mapMutations(['copyCharacterToStore'])
   }
@@ -169,7 +171,4 @@ export default {
 
 <style>
   input { display:none; }
-  .active {
-    box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, .2);
-  }
 </style>

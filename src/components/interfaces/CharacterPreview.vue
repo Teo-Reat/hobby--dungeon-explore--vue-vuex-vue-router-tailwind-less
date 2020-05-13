@@ -1,0 +1,29 @@
+<template>
+  <div class="character-preview w-3/12 text-left px-4 py-2">
+    <strong>Name: {{ character.name }}</strong>
+    <p>Gender: {{ character.gender }}</p>
+    <p>Background: {{ character.background }}</p>
+    <p>Class: {{ character.class }}</p>
+    <ul class="pl-2 mt-2">
+      <li v-for="(value, stat, index) in character.stats" :key="index">{{ stat }}: {{ value }}</li>
+    </ul>
+    <ul class="pl-2 mt-2">
+      <li v-for="(value, stat, index) in character.state" :key="index">{{ stat }}: {{ value }}</li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    character: {
+      type: Object,
+      required: true
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

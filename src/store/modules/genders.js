@@ -13,7 +13,7 @@ const state = {
     {
       id: 1,
       gender: 'Female',
-      description: 'Ship-wide loves lead to the friendship.',
+      description: 'Women are like elevators; up one second, down the next, stuck, falling, or broken requiring minimal or extreme maintenance.',
       stats: {
         strength: 4,
         dexterity: 6,

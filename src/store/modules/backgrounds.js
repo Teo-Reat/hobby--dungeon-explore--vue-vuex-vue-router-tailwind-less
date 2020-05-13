@@ -33,7 +33,7 @@ export default {
       },
       {
         id: 3,
-        background: 'Trader',
+        background: 'Mystic',
         description: 'For a niffy minced paste, add some white wine and cayenne pepper.',
         stats: {
           strength: 1,
