@@ -53,6 +53,14 @@ export default {
     this.calculateCharacterStats(this.enemy)
   },
   computed: {
+    setHealth: {
+      get () {
+        return this.character.state.healthPoints
+      },
+      set (value) {
+        this.$store.commit('updateHealth', value)
+      }
+    },
     ...mapGetters(['getCharacter'])
   },
   methods: {
@@ -93,7 +101,7 @@ export default {
           console.log(`Evasion = ${evasion} / ${eRandom} and you hit target on ${damage * 2}. Hit = ${critical} / ${cRandom}`)
         }
       } else {
-        console.log(`Evasion = ${evasion} / ${eRandom} and target evade from your attack.`)
+        console.log(`Evasion range from 0 to ${evasion}, you throw ${eRandom} and target evade from your attack.`)
       }
       this.fastPunchAI()
     }

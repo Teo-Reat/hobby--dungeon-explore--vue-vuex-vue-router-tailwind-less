@@ -1,13 +1,13 @@
 <template>
-  <div class="character-preview w-3/12 text-left px-4 py-2">
+  <div class="character-preview w-3/12 text-left px-4 py-2 bg-green-200 mx-3 rounded character-preview">
     <strong>Name: {{ character.name }}</strong>
     <p>Gender: {{ character.gender }}</p>
     <p>Background: {{ character.background }}</p>
     <p>Class: {{ character.class }}</p>
-    <ul class="pl-2 mt-2">
+    <ul class="pl-2 mt-8">
       <li v-for="(value, stat, index) in character.stats" :key="index">{{ stat }}: {{ value }}</li>
     </ul>
-    <ul class="pl-2 mt-2">
+    <ul class="pl-2 mt-4">
       <li v-for="(value, stat, index) in character.state" :key="index">{{ stat }}: {{ value }}</li>
     </ul>
   </div>
@@ -25,5 +25,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .character-preview {
+    height: 340px;
+  }
 </style>
