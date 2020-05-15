@@ -5,10 +5,10 @@
     <p>Background: {{ character.background }}</p>
     <p>Class: {{ character.class }}</p>
     <ul class="pl-2 mt-8">
-      <li v-for="(value, stat, index) in character.stats" :key="index">{{ stat }}: {{ value }}</li>
+      <li v-for="(value, stat, index) in character.stats" :key="index" v-show="value">{{ stat }}: {{ value }}</li>
     </ul>
-    <ul class="pl-2 mt-4">
-      <li v-for="(value, stat, index) in character.state" :key="index">{{ stat }}: {{ value }}</li>
+    <ul class="pl-2 mt-4" v-show="character.hasOwnProperty('state')">
+      <li v-for="(value, stat, index) in character.state" :key="index" v-show="value">{{ stat }}: {{ value }}</li>
     </ul>
   </div>
 </template>

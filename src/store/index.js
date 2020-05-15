@@ -5,7 +5,6 @@ import character from './modules/character'
 import genders from './modules/genders'
 import classes from './modules/classes'
 import backgrounds from './modules/backgrounds'
-import characters from './modules/characters'
 
 Vue.use(Vuex)
 
@@ -21,7 +20,6 @@ export default new Vuex.Store({
     character,
     genders,
     classes,
-    backgrounds,
-    characters
+    backgrounds
   }
 })

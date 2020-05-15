@@ -2,8 +2,8 @@
   <div>
     <router-link to="/">Home</router-link>
     <dialog-scene v-if="!fight" :situation="situation" :persons="persons" />
-    <fight-scene v-else />
-    <button @click="fight = true">Fight!</button>
+    <fight-scene v-else :persons="persons" />
+    <button @click="fight = true" class="bg-red-700 text-white px-4 py-2 rounded" v-show="!fight">Prepare to fight!</button>
   </div>
 </template>
 
@@ -29,6 +29,12 @@ export default {
             strength: 0,
             dexterity: 0,
             intelligence: 0
+          },
+          state: {
+            HP: 0,
+            damage: 0,
+            evasion: 0,
+            critical: 0
           }
         }
       ],
