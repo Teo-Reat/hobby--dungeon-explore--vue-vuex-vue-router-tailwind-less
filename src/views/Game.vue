@@ -1,9 +1,9 @@
 <template>
   <div>
-    <router-link to="/">Home</router-link>
     <dialog-scene v-if="!fight" :situation="situation" :persons="persons" />
     <fight-scene v-else :persons="persons" />
     <button @click="fight = true" class="bg-red-700 text-white px-4 py-2 rounded" v-show="!fight">Prepare to fight!</button>
+    <router-link to="/" class="mt-8 bg-orange-600 text-white py-2 px-4 rounded mr-auto block w-1/6">Home</router-link>
   </div>
 </template>
 

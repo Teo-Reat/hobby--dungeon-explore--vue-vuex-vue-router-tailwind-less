@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div>
-      <router-link to="/">Home</router-link>
-      <hr>
-    </div>
     <section class="wrapper">
 
 <!--      character: preview-->
@@ -60,7 +56,7 @@
       </div>
 
 <!--      character: dynamic information-->
-      <div class="temporary-condition w-3/12 px-4 py-2">
+      <div class="temporary-condition w-3/12 px-4 py-2 bg-green-200 rounded">
         <div v-show="character.gender" class="mb-2">
           <strong>{{ character.gender }}</strong>
           <p v-for="type in getGender"
@@ -94,9 +90,11 @@
     </section>
 
 <!--    character: save & step-->
-    <button @click="copyCharacterToStore(character)">Save</button>
-    <br>
-    <router-link to="/game">Start game</router-link>
+    <div class="flex justify-start">
+      <router-link to="/" class="mt-8 mr-2 bg-orange-600 text-white py-2 px-4 rounded block w-1/6">Home</router-link>
+      <button @click="copyCharacterToStore(character)" class="mt-8 mr-2 bg-orange-600 text-white py-2 px-4 rounded block w-1/6">Save</button>
+      <router-link to="/game" class="mt-8 mr-2 bg-orange-600 text-white py-2 px-4 rounded block w-1/6">Start game</router-link>
+    </div>
   </div>
 </template>
 
@@ -171,4 +169,7 @@ export default {
 
 <style>
   input { display:none; }
+  .temporary-condition {
+    height: 450px;
+  }
 </style>

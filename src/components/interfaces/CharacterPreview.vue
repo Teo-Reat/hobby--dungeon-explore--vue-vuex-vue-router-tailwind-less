@@ -1,5 +1,5 @@
 <template>
-  <div class="character-preview w-3/12 text-left px-4 py-2 bg-green-200 mx-3 rounded character-preview">
+  <div :class="background" class="character-preview w-3/12 text-left px-4 py-2 mx-3 rounded character-preview">
     <strong>Name: {{ character.name }}</strong>
     <p>Gender: {{ character.gender }}</p>
     <p>Background: {{ character.background }}</p>
@@ -19,6 +19,11 @@ export default {
     character: {
       type: Object,
       required: true
+    },
+    background: {
+      type: String,
+      required: false,
+      default: 'bg-green-200'
     }
   }
 }
